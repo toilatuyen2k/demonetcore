@@ -15634,6 +15634,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Netcore\\DemoNetcore\\Views\\helloworld\\Welcome.cshtml",
+      "TargetPath": "Views\\helloworld\\Welcome.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Netcore\\DemoNetcore\\Views\\helloworld\\Index.cshtml",
+      "TargetPath": "Views\\helloworld\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Netcore\\DemoNetcore\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
