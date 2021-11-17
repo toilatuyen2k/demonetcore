@@ -3,11 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DemoNetcore.Models
 {
-    [Table("Persons")]
+    [Table("Person")]
     public class Person
     {
         [Key]
-        public string PersonID { get; set; }
-        public string PersonName { get; set; }
+        public int PersonId { get; set; }
+        public string PersonCode { get; set; }
+        public string PersonFullName { get; set; }
     }
 }

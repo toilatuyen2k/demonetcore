@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DemoNetcore.Models
 {
-    [Table("Students")]
-    public class Student
+    [Table("Student")]
+    public class Student:Person
     {
-        [Key]
-        public String StudentID { get; set; }
-        public String StudentName { get; set; }
-        public String Address { get; set; }
+    
+        public string University { get; set; }
+        
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

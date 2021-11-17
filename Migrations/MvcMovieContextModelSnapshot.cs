@@ -57,15 +57,19 @@ namespace DemoNetcore.Migrations
 
             modelBuilder.Entity("DemoNetcore.Models.Person", b =>
                 {
-                    b.Property<string>("PersonID")
+                    b.Property<int>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PersonCode")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PersonName")
+                    b.Property<string>("PersonFullName")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PersonID");
+                    b.HasKey("PersonId");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Person");
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.Product", b =>
@@ -87,20 +91,82 @@ namespace DemoNetcore.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("DemoNetcore.Models.hoadon", b =>
+                {
+                    b.Property<int>("hoadonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("hoadonCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("hoadonFullName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("khachhangskhachhangId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("hoadonId");
+
+                    b.HasIndex("khachhangskhachhangId");
+
+                    b.ToTable("hoadon");
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
+                {
+                    b.Property<int>("khachhangId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("khachhangCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("khachhangFullName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("khachhangId");
+
+                    b.ToTable("khachhang");
+                });
+
             modelBuilder.Entity("DemoNetcore.Models.Student", b =>
                 {
-                    b.Property<string>("StudentID")
-                        .HasColumnType("TEXT");
+                    b.HasBaseType("DemoNetcore.Models.Person");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StudentName")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("StudentID");
+                    b.Property<string>("University")
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.hoadon", b =>
+                {
+                    b.HasOne("DemoNetcore.Models.khachhang", "khachhangs")
+                        .WithMany("hoadons")
+                        .HasForeignKey("khachhangskhachhangId");
+
+                    b.Navigation("khachhangs");
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.Student", b =>
+                {
+                    b.HasOne("DemoNetcore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("DemoNetcore.Models.Student", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
+                {
+                    b.Navigation("hoadons");
                 });
 #pragma warning restore 612, 618
         }
