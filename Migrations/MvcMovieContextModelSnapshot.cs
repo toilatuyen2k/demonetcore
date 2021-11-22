@@ -97,37 +97,36 @@ namespace DemoNetcore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("PersonId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("hoadonCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("hoadonFullName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("khachhangskhachhangId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("hoadonId");
 
-                    b.HasIndex("khachhangskhachhangId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("hoadon");
                 });
 
-            modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
+            modelBuilder.Entity("DemoNetcore.Models.Nhanvien", b =>
                 {
-                    b.Property<int>("khachhangId")
-                        .ValueGeneratedOnAdd()
+                    b.HasBaseType("DemoNetcore.Models.Person");
+
+                    b.Property<string>("NhanvienCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NhanvienFullName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("NhanvienId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("khachhangCode")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("khachhangFullName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("khachhangId");
-
-                    b.ToTable("khachhang");
+                    b.ToTable("Nhanvien");
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.Student", b =>
@@ -146,13 +145,37 @@ namespace DemoNetcore.Migrations
                     b.ToTable("Student");
                 });
 
+            modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
+                {
+                    b.HasBaseType("DemoNetcore.Models.Person");
+
+                    b.Property<string>("khachhangCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("khachhangFullName")
+                        .HasColumnType("TEXT");
+
+                    b.ToTable("khachhang");
+                });
+
             modelBuilder.Entity("DemoNetcore.Models.hoadon", b =>
                 {
-                    b.HasOne("DemoNetcore.Models.khachhang", "khachhangs")
+                    b.HasOne("DemoNetcore.Models.Person", "Person")
                         .WithMany("hoadons")
-                        .HasForeignKey("khachhangskhachhangId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("khachhangs");
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.Nhanvien", b =>
+                {
+                    b.HasOne("DemoNetcore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("DemoNetcore.Models.Nhanvien", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.Student", b =>
@@ -165,6 +188,15 @@ namespace DemoNetcore.Migrations
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
+                {
+                    b.HasOne("DemoNetcore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("DemoNetcore.Models.khachhang", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DemoNetcore.Models.Person", b =>
                 {
                     b.Navigation("hoadons");
                 });

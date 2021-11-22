@@ -25,6 +25,7 @@ namespace DemoNetcore.Data{
         public DbSet<DemoNetcore.Models.khachhang> khachhang { get; set; }
 
         public DbSet<DemoNetcore.Models.hoadon> hoadon { get; set; }
+        public DbSet<DemoNetcore.Models.Nhanvien> Hocsinh { get; set; }
     }
 
 

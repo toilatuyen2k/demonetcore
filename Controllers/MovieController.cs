@@ -55,13 +55,13 @@ namespace DemoNetcore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
-        {
-            if (ModelState.IsValid)
+        {try{if (ModelState.IsValid)
             {
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            }}catch(Exception e){ModelState.AddModelError("","Khoa Chinh Bi Trung"+e);}
+            
             return View(movie);
         }
 

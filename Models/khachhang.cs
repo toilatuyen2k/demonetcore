@@ -5,12 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DemoNetcore.Models
 {
     [Table("khachhang")]
-    public class khachhang
+    public class khachhang:Person
     {
-        [Key]
-        public int khachhangId { get; set; }
         public string khachhangCode { get; set; }
         public string khachhangFullName { get; set; }
-        public ICollection<hoadon> hoadons {get; set;}
     }
 }

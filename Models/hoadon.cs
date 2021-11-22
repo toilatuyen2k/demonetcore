@@ -8,8 +8,9 @@ namespace DemoNetcore.Models
     {
         [Key]
         public int hoadonId { get; set; }
+         public int PersonId { get; set; }
         public string hoadonCode { get; set; }
         public string hoadonFullName { get; set; } 
-        public khachhang khachhangs { get;set; }
+        public Person Person { get;set; }
     }
 }
