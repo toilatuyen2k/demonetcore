@@ -1,4 +1,4 @@
-@model IEnumerable<DemoNetcore.Models.Student>
+@model DemoNetcore.Models.MovieGenreViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,29 +9,35 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Student" asp-action="Index">
+    <p>
+         <select asp-for="loaidachon" asp-items="Model.ds">
+            <option value="">All</option>
+        </select>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.University)
+                @Html.DisplayNameFor(model => model.Students[0].University)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Students[0].Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.Students[0].PersonFullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PersonCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonFullName)
+                @Html.DisplayNameFor(model => model.Students[0].PhoneNumber)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Students) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.University)

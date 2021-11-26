@@ -20,10 +20,33 @@ namespace DemoNetcore.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Student.ToListAsync());
-        }
+         public async Task<IActionResult> Index(string StudentAddress, string searchString)
+{
+    // Use LINQ to get list of genres.
+    IQueryable<string> genreQuery = from m in _context.Student
+                                    orderby m.University
+                                    select m.University;
+    var students = from m in _context.Student
+                 select m;
+
+    if (!string.IsNullOrEmpty(searchString))
+    {
+        students = students.Where(s => s.University!.Contains(searchString));
+    }
+
+    if (!string.IsNullOrEmpty(StudentAddress))
+    {
+        students = students.Where(x => x.Address == StudentAddress);
+    }
+
+    var StudentsVM = new MovieGenreViewModel
+    {
+        ds = new SelectList(await genreQuery.Distinct().ToListAsync()),
+        Students = await students.ToListAsync()
+    };
+
+    return View(StudentsVM);
+}
 
         // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -20,10 +20,33 @@ namespace DemoNetcore.Controllers
         }
 
         // GET: Movie
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Movie.ToListAsync());
-        }
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
+{
+    // Use LINQ to get list of genres.
+    IQueryable<string> genreQuery = from m in _context.Movie
+                                    orderby m.Genre
+                                    select m.Genre;
+    var movie = from m in _context.Movie
+                 select m;
+
+    if (!string.IsNullOrEmpty(searchString))
+    {
+        movie = movie.Where(s => s.Title!.Contains(searchString));
+    }
+
+    if (!string.IsNullOrEmpty(movieGenre))
+    {
+        movie = movie.Where(x => x.Genre == movieGenre);
+    }
+
+    var movieGenreVM = new MovieGenreViewModel
+    {
+        ds = new SelectList(await genreQuery.Distinct().ToListAsync()),
+        Movie = await movie.ToListAsync()
+    };
+
+    return View(movieGenreVM);
+}
 
         // GET: Movie/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -144,6 +167,7 @@ namespace DemoNetcore.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
 
         private bool MovieExists(int id)
         {
