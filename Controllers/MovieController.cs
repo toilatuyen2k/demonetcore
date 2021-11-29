@@ -77,16 +77,16 @@ namespace DemoNetcore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
-        {try{if (ModelState.IsValid)
-            {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }}catch(Exception e){ModelState.AddModelError("","Khoa Chinh Bi Trung"+e);}
-            
-            return View(movie);
-        }
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+{
+    if (ModelState.IsValid)
+    {
+        _context.Add(movie);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    return View(movie);
+}
 
         // GET: Movie/Edit/5
         public async Task<IActionResult> Edit(int? id)

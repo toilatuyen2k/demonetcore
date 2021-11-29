@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoNetcore.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20211122092428_cap_nhat")]
+    [Migration("20211129082540_cap_nhat")]
     partial class cap_nhat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,20 +41,29 @@ namespace DemoNetcore.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Rating")
+                        .IsRequired()
+                        .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("movie");
+                    b.ToTable("Movie");
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.Person", b =>
