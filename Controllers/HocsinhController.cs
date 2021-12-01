@@ -10,45 +10,22 @@ using DemoNetcore.Models;
 
 namespace DemoNetcore.Controllers
 {
-    public class StudentsController : Controller
+    public class HocsinhController : Controller
     {
         private readonly MvcMovieContext _context;
 
-        public StudentsController(MvcMovieContext context)
+        public HocsinhController(MvcMovieContext context)
         {
             _context = context;
         }
 
-        // GET: Students
-         public async Task<IActionResult> Index(string StudentAddress, string searchString)
-{
-    // Use LINQ to get list of genres.
-    IQueryable<string> genreQuery = from m in _context.Student
-                                    orderby m.University
-                                    select m.University;
-    var students = from m in _context.Student
-                 select m;
+        // GET: Hocsinh
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Hocsinhs.ToListAsync());
+        }
 
-    if (!string.IsNullOrEmpty(searchString))
-    {
-        students = students.Where(s => s.University!.Contains(searchString));
-    }
-
-    if (!string.IsNullOrEmpty(StudentAddress))
-    {
-        students = students.Where(x => x.Address == StudentAddress);
-    }
-
-    var StudentsVM = new MovieGenreViewModel
-    {
-        ds = new SelectList(await genreQuery.Distinct().ToListAsync()),
-        Students = await students.ToListAsync()
-    };
-
-    return View(StudentsVM);
-}
-
-        // GET: Students/Details/5
+        // GET: Hocsinh/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -56,39 +33,39 @@ namespace DemoNetcore.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
+            var hocsinh = await _context.Hocsinhs
                 .FirstOrDefaultAsync(m => m.PersonId == id);
-            if (student == null)
+            if (hocsinh == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(hocsinh);
         }
 
-        // GET: Students/Create
+        // GET: Hocsinh/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Hocsinh/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("University,Address,PhoneNumber,PersonId,PersonCode,PersonFullName")] Student student)
+        public async Task<IActionResult> Create([Bind("Age,PersonId,PersonCode,PersonFullName,Address")] Hocsinh hocsinh)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
+                _context.Add(hocsinh);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(hocsinh);
         }
 
-        // GET: Students/Edit/5
+        // GET: Hocsinh/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,22 +73,22 @@ namespace DemoNetcore.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
-            if (student == null)
+            var hocsinh = await _context.Hocsinhs.FindAsync(id);
+            if (hocsinh == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(hocsinh);
         }
 
-        // POST: Students/Edit/5
+        // POST: Hocsinh/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("University,Address,PhoneNumber,PersonId,PersonCode,PersonFullName")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Age,PersonId,PersonCode,PersonFullName,Address")] Hocsinh hocsinh)
         {
-            if (id != student.PersonId)
+            if (id != hocsinh.PersonId)
             {
                 return NotFound();
             }
@@ -120,12 +97,12 @@ namespace DemoNetcore.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(hocsinh);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.PersonId))
+                    if (!HocsinhExists(hocsinh.PersonId))
                     {
                         return NotFound();
                     }
@@ -136,10 +113,10 @@ namespace DemoNetcore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(hocsinh);
         }
 
-        // GET: Students/Delete/5
+        // GET: Hocsinh/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,30 +124,30 @@ namespace DemoNetcore.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
+            var hocsinh = await _context.Hocsinhs
                 .FirstOrDefaultAsync(m => m.PersonId == id);
-            if (student == null)
+            if (hocsinh == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(hocsinh);
         }
 
-        // POST: Students/Delete/5
+        // POST: Hocsinh/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Student.FindAsync(id);
-            _context.Student.Remove(student);
+            var hocsinh = await _context.Hocsinhs.FindAsync(id);
+            _context.Hocsinhs.Remove(hocsinh);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool HocsinhExists(int id)
         {
-            return _context.Student.Any(e => e.PersonId == id);
+            return _context.Hocsinhs.Any(e => e.PersonId == id);
         }
     }
 }

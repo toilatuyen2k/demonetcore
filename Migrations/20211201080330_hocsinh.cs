@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DemoNetcore.Migrations
 {
-    public partial class cap_nhat : Migration
+    public partial class hocsinh : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,6 +87,25 @@ namespace DemoNetcore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Hocsinh",
+                columns: table => new
+                {
+                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Age = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hocsinh", x => x.PersonId);
+                    table.ForeignKey(
+                        name: "FK_Hocsinh_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "khachhang",
                 columns: table => new
                 {
@@ -127,27 +146,6 @@ namespace DemoNetcore.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Student",
-                columns: table => new
-                {
-                    PersonId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    University = table.Column<string>(type: "TEXT", nullable: true),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Student", x => x.PersonId);
-                    table.ForeignKey(
-                        name: "FK_Student_Person_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "Person",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_hoadon_PersonId",
                 table: "hoadon",
@@ -163,6 +161,9 @@ namespace DemoNetcore.Migrations
                 name: "hoadon");
 
             migrationBuilder.DropTable(
+                name: "Hocsinh");
+
+            migrationBuilder.DropTable(
                 name: "khachhang");
 
             migrationBuilder.DropTable(
@@ -173,9 +174,6 @@ namespace DemoNetcore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Student");
 
             migrationBuilder.DropTable(
                 name: "Person");

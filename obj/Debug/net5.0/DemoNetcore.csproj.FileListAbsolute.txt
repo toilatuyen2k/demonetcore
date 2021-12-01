@@ -180,11 +180,6 @@ G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Product\Delete.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Product\Details.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Product\Edit.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Product\Index.cshtml.g.cs
-G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Students\Create.cshtml.g.cs
-G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Students\Delete.cshtml.g.cs
-G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Students\Details.cshtml.g.cs
-G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Students\Edit.cshtml.g.cs
-G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Students\Index.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hoadon\Create.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hoadon\Delete.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hoadon\Details.cshtml.g.cs
@@ -205,3 +200,8 @@ G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Nhanvien\Delete.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Nhanvien\Details.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Nhanvien\Edit.cshtml.g.cs
 G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Nhanvien\Index.cshtml.g.cs
+G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hocsinh\Create.cshtml.g.cs
+G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hocsinh\Delete.cshtml.g.cs
+G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hocsinh\Details.cshtml.g.cs
+G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hocsinh\Edit.cshtml.g.cs
+G:\Netcore\DemoNetcore\obj\Debug\net5.0\Razor\Views\Hocsinh\Index.cshtml.g.cs

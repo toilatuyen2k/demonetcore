@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DemoNetcore.Controllers
         {
             _context = context;
         }
-
+    
         // GET: Product
         public async Task<IActionResult> Index()
         {
@@ -46,6 +47,13 @@ namespace DemoNetcore.Controllers
         // GET: Product/Create
         public IActionResult Create()
         {
+            var model = _context.Product.ToList();
+            if (model.Count == 0) ViewBag.id = "SP001";
+            else
+            {
+                var id = model.OrderByDescending(s => s.ProductID).FirstOrDefault().ProductID;
+                ViewBag.id =Pro.AutoKey(id);
+            }
             return View();
         }
 

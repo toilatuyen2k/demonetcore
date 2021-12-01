@@ -20,7 +20,7 @@ namespace DemoNetcore.Data{
 
         public DbSet<DemoNetcore.Models.Product> Product { get; set; }
 
-        public DbSet<DemoNetcore.Models.Student> Student { get; set; }
+        public DbSet<DemoNetcore.Models.Hocsinh> Hocsinhs{ get; set; }
 
         public DbSet<DemoNetcore.Models.khachhang> khachhang { get; set; }
 

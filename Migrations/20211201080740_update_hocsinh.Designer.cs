@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoNetcore.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20211129082540_cap_nhat")]
-    partial class cap_nhat
+    [Migration("20211201080740_update_hocsinh")]
+    partial class update_hocsinh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,6 +124,19 @@ namespace DemoNetcore.Migrations
                     b.ToTable("hoadon");
                 });
 
+            modelBuilder.Entity("DemoNetcore.Models.Hocsinh", b =>
+                {
+                    b.HasBaseType("DemoNetcore.Models.Person");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.ToTable("Hocsinh");
+                });
+
             modelBuilder.Entity("DemoNetcore.Models.Nhanvien", b =>
                 {
                     b.HasBaseType("DemoNetcore.Models.Person");
@@ -138,22 +151,6 @@ namespace DemoNetcore.Migrations
                         .HasColumnType("INTEGER");
 
                     b.ToTable("Nhanvien");
-                });
-
-            modelBuilder.Entity("DemoNetcore.Models.Student", b =>
-                {
-                    b.HasBaseType("DemoNetcore.Models.Person");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("University")
-                        .HasColumnType("TEXT");
-
-                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("DemoNetcore.Models.khachhang", b =>
@@ -180,20 +177,20 @@ namespace DemoNetcore.Migrations
                     b.Navigation("Person");
                 });
 
+            modelBuilder.Entity("DemoNetcore.Models.Hocsinh", b =>
+                {
+                    b.HasOne("DemoNetcore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("DemoNetcore.Models.Hocsinh", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DemoNetcore.Models.Nhanvien", b =>
                 {
                     b.HasOne("DemoNetcore.Models.Person", null)
                         .WithOne()
                         .HasForeignKey("DemoNetcore.Models.Nhanvien", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DemoNetcore.Models.Student", b =>
-                {
-                    b.HasOne("DemoNetcore.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("DemoNetcore.Models.Student", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
